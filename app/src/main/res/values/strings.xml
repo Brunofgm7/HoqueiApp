@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">AppHoquei</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="forgor_your_password">Forgor your password?</string>
+    <string name="login2">Login</string>
+    <string name="ainda_n_o_tem_conta">Ainda não tem conta?</string>
+    <string name="registo">Registo</string>
+    <string name="j_tem_conta">Já tem conta?</string>
+    <string name="registo2">Registo</string>
+    <string name="repetir_password">Repetir password</string>
+    <string name="perfil">Perfil</string>
+    <string name="username2">Username:</string>
+    <string name="email">Email:</string>
+    <string name="guardar">Guardar</string>
+    <string name="mudar_password">Mudar Password</string>
+    <string name="email2">Email</string>
+    <string name="mudar_email">Mudar Email</string>
 </resources>

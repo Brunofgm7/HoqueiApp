@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/resultados"
+        android:title="Resultados"
+        android:icon="@drawable/resultados" />
+
+    <item
+        android:id="@+id/aovivo"
+        android:title="Ao Vivo"
+        android:icon="@drawable/aovivo" />
+
+    <item
+        android:id="@+id/campeonatos"
+        android:title="Campeonatos"
+        android:icon="@drawable/campeonatos" />
+
+    <item
+        android:id="@+id/minhasequipas"
+        android:title="Minhas Equipas"
+        android:icon="@drawable/minhasequipas" />
+
+    <item
+        android:id="@+id/login"
+        android:title="Login"
+        android:icon="@drawable/login" />
+
+
+</menu>
