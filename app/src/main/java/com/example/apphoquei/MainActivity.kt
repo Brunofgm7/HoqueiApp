@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
         setupNavigation(bottomNavigationView)
-        var a = 1
+        var a = 2
 
     }
 
