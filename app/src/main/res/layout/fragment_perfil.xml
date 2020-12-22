@@ -38,13 +38,13 @@
         android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/botaoRegistar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="-150dp"
-        android:backgroundTint="#9FED91"
+        android:layout_marginBottom="-140dp"
         android:width="200dp"
+        android:backgroundTint="#9FED91"
         android:text="@string/guardar" />
 
     <Button
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="-210dp"
+        android:layout_marginBottom="-200dp"
         android:width="200dp"
         android:backgroundTint="#ffffff"
         android:text="@string/mudar_password" />
@@ -62,10 +62,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="-270dp"
+        android:layout_marginBottom="-260dp"
         android:width="200dp"
         android:backgroundTint="#ffffff"
         android:text="@string/mudar_email" />
+
+    <Button
+        android:id="@+id/botaoLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="-320dp"
+        android:width="200dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:text="@string/logout" />
 
     <TextView
         android:id="@+id/textView"

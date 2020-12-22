@@ -1,24 +1,19 @@
 package com.example.apphoquei
 
-import android.R
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-
 
 class LoginFragment : Fragment() {
+    override fun onCreateView (inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-    lateinit var BotaoRegisto : Button
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val botaoRegisto = view.findViewById(R.id.botaoJaTemConta) as Button
 
-        val view: View = inflater!!.inflate(com.example.apphoquei.R.layout.fragment_perfil, container, false)
-
-        val botaoRegisto: Button = view.findViewById(R.id.button2)
         botaoRegisto.setOnClickListener {
             val RegistoFragment = RegistoFragment()
             activity!!.supportFragmentManager.beginTransaction()
@@ -26,21 +21,10 @@ class LoginFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-
         return view
     }
 
     companion object {
-        fun newInstance(): LoginFragment = LoginFragment()
+        fun newInstance(): MinhasEquipasFragment = MinhasEquipasFragment()
     }
-
-//    override fun onClick(v: View?) {
-//        when(v?.id) {
-//            R.id.button2 -> {
-//
-//            }
-//        }
-//    }
-
-
 }

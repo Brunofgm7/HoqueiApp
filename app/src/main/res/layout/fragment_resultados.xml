@@ -6,12 +6,22 @@
     tools:context=".ResultadosFragment">
 
     <TextView
+        android:id="@+id/textViewMostrarData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+
+        android:layout_marginTop="10dp"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TextViewMostraData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Resultados"
+        android:text="@string/resultados"
         android:textSize="38sp" />
 
 </FrameLayout>
