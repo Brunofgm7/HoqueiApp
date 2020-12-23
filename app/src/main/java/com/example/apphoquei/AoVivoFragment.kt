@@ -21,7 +21,7 @@ class AoVivoFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu2, menu)
 
-        menu!!.findItem(R.id.data).isVisible = false
+        menu.findItem(R.id.data).isVisible = false
 
         super.onCreateOptionsMenu(menu, inflater)
     }

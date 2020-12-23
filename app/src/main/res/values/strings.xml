@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AppHoquei</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello blanhgk fragment</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
@@ -21,4 +21,13 @@
     <string name="textview">TextView</string>
     <string name="logout">Logout</string>
     <string name="resultados">Resultados</string>
+    <string name="emailRegisto">Email</string>
+    <string name="nome">Nome</string>
+    <string name="teste">teste</string>
+    <string name="title_activity_verificar_login">VerificarLoginActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>
