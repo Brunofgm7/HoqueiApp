@@ -1,13 +1,11 @@
 package com.example.apphoquei
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
-import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -1,13 +1,13 @@
 package com.example.apphoquei
 
-import android.content.Intent
+import android.app.Application
 import android.os.Bundle
-import android.os.Handler
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var campeonatosFragment: CampeonatosFragment
     lateinit var minhasequipasFragment: MinhasEquipasFragment
     lateinit var loginFragment: LoginFragment
+    lateinit var perfilFragment: PerfilFragment
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.btn_nav)
-//        val bottomNavigationViewLoggedin = findViewById<BottomNavigationView>(R.id.btn_nav_loggedin)
+        val bottomNavigationViewLoggedin = findViewById<BottomNavigationView>(R.id.btn_nav_loggedin)
 
         resultadosFragment = ResultadosFragment()
         supportFragmentManager
@@ -33,12 +35,19 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.frame_layout, resultadosFragment)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
-        setupNavigation(bottomNavigationView)
 
+        if(FirebaseAuth.getInstance().currentUser == null) {
+            setupNavigation(bottomNavigationView)
+            bottomNavigationView.visibility = View.VISIBLE
+            bottomNavigationViewLoggedin.visibility = View.INVISIBLE
+        } else {
+            setupNavigation((bottomNavigationViewLoggedin))
+            bottomNavigationView.visibility = View.INVISIBLE
+            bottomNavigationViewLoggedin.visibility = View.VISIBLE
+        }
     }
 
 
-    //adicionar if logged in
     private fun setupNavigation(bottomNavigationView: BottomNavigationView) {
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -82,13 +91,18 @@ class MainActivity : AppCompatActivity() {
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit()
                 }
+                R.id.perfil -> {
+                    perfilFragment = PerfilFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frame_layout, perfilFragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
+                }
             }
             true
         }
     }
-    //else (se nao tiver login feito)
-    //desativar a bottom navigation view antes de ter sessão e ativar a outra bottom nav view (visible/invisible)
-
 
 
     //adicionar esta função para dar double back para sair da aplicação
@@ -109,11 +123,5 @@ class MainActivity : AppCompatActivity() {
 //    }
 
 
-
-    //    Apagar se nao for usada
-    private fun executarOutraActivity(outraActivity: Class<*>) {
-        val x = Intent(this, outraActivity)
-        startActivity(x)
-    }
 
 }
