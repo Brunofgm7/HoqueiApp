@@ -1,10 +1,12 @@
 package com.example.apphoquei
 
-import android.app.Application
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -17,6 +19,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var minhasequipasFragment: MinhasEquipasFragment
     lateinit var loginFragment: LoginFragment
     lateinit var perfilFragment: PerfilFragment
+    private var doubleBackToExitPressedOnce = false
+    private var backPressedTime: Long = 0
+    lateinit var backToast:Toast
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,75 +58,57 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.resultados -> {
                     resultadosFragment = ResultadosFragment()
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frame_layout, resultadosFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
+                    mudarFragment(resultadosFragment)
+
                 }
                 R.id.aovivo -> {
                     aovivoFragment = AoVivoFragment()
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frame_layout, aovivoFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
+                    mudarFragment(aovivoFragment)
+
                 }
                 R.id.campeonatos -> {
                     campeonatosFragment = CampeonatosFragment()
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frame_layout, campeonatosFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
+                    mudarFragment(campeonatosFragment)
+
                 }
                 R.id.minhasequipas -> {
                     minhasequipasFragment = MinhasEquipasFragment()
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frame_layout, minhasequipasFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
+                    mudarFragment(minhasequipasFragment)
+
                 }
                 R.id.login -> {
                     loginFragment = LoginFragment()
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frame_layout, loginFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
+                    mudarFragment(loginFragment)
+
                 }
                 R.id.perfil -> {
                     perfilFragment = PerfilFragment()
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frame_layout, perfilFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
+                    mudarFragment(perfilFragment)
                 }
             }
             true
         }
     }
 
+    private fun mudarFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.frame_layout, fragment)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
+    }
 
-    //adicionar esta função para dar double back para sair da aplicação
-
-//    private var doubleBackToExitPressedOnce = false
-//    override fun onBackPressed() {
-//        if (doubleBackToExitPressedOnce) {
-//            super.onBackPressed()
-//            finishAffinity()
-//            return
-//        }
-//
-//        this.doubleBackToExitPressedOnce = true
-//        Toast.makeText(this, "BACK novamente para sair", Toast.LENGTH_SHORT).show()
-//
-//
-//        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
-//    }
-
+    override fun onBackPressed() {
+        backToast = Toast.makeText(this, "Prima BACK novamente para sair.", Toast.LENGTH_SHORT)
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            backToast.cancel()
+            super.onBackPressed()
+            return
+        } else {
+            backToast.show()
+        }
+        backPressedTime = System.currentTimeMillis()
+    }
 
 
 }

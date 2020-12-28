@@ -37,9 +37,9 @@ class LoginFragment : Fragment() {
         }
 
         botaoRegisto.setOnClickListener {
-            val RegistoFragment = RegistoFragment()
+            val registoFragment = RegistoFragment()
             activity!!.supportFragmentManager.beginTransaction()
-                .replace(com.example.apphoquei.R.id.frame_layout, RegistoFragment, "findThisFragment")
+                .replace(com.example.apphoquei.R.id.frame_layout, registoFragment, "findThisFragment")
                 .addToBackStack(null)
                 .commit()
         }
@@ -50,14 +50,8 @@ class LoginFragment : Fragment() {
         if (email.isNotEmpty() && pass.isNotEmpty()) {
             mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
-                    val loggedinFragment = PerfilFragment()
-                    activity!!.supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame_layout, loggedinFragment, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit()
-//                        (activity as MainActivity?)?.recreate()
+                    activity?.finish();
                     this.startActivity(Intent(view?.context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
-
                 } else {
                     Toast.makeText(activity, "Login sem sucesso ", Toast.LENGTH_SHORT).show()
                 }

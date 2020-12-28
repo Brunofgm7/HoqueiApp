@@ -13,46 +13,32 @@
         android:text="@string/perfil"
         android:textSize="38sp" />
 
-    <EditText
-        android:id="@+id/textViewUsername"
+    <TextView
+        android:id="@+id/textViewNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="50dp"
-        android:layout_marginStart="75dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/username"
-        android:inputType="textPersonName" />
+        android:layout_marginStart="20dp"
+        android:inputType="textPersonName"
+        android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/editTextTextRepetirPassword"
+    <TextView
+        android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="-50dp"
-        android:layout_marginStart="75dp"
-        android:ems="10"
-        android:hint="@string/email2"
-        android:inputType="textPassword"
-        android:importantForAutofill="no" />
+        android:layout_marginStart="20dp"
+        android:textSize="17sp" />
 
-    <Button
-        android:id="@+id/botaoLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="-140dp"
-        android:width="200dp"
-        android:backgroundTint="#9FED91"
-        android:text="@string/guardar" />
 
     <Button
         android:id="@+id/botaoMudarPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="-200dp"
+        android:layout_marginBottom="-210dp"
         android:width="200dp"
         android:backgroundTint="#ffffff"
         android:text="@string/mudar_password" />
@@ -62,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="-250dp"
+        android:layout_marginBottom="-150dp"
         android:width="200dp"
         android:backgroundTint="#ffffff"
         android:text="@string/mudar_email" />
@@ -72,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="-300dp"
+        android:layout_marginBottom="-270dp"
         android:width="200dp"
         android:backgroundTint="@android:color/holo_red_light"
         android:text="@string/logout" />
@@ -82,10 +68,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="160dp"
         android:layout_marginBottom="50dp"
-        android:text="@string/username2"
+        android:text="@string/nome2"
         android:textSize="17sp"
         android:textStyle="bold" />
 
@@ -94,8 +80,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="180dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="160dp"
         android:layout_marginBottom="-50dp"
         android:text="@string/email"
         android:textSize="17sp"
