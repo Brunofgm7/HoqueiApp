@@ -38,7 +38,7 @@
     <string name="password_atual">Password atual:</string>
     <string name="mudar_password2">Mudar password</string>
     <string name="nova_password">Nova password:</string>
-    <string name="repetir_nova_password">Repetir<br/>nova password:</string>
+    <string name="repetir_nova_password">Repetir<br/> nova password:</string>
     <string name="inserir_password_atual">Inserir password atual</string>
     <string name="inserir_nova_password">Inserir nova password</string>
     <string name="guardar3">Guardar</string>

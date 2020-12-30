@@ -51,7 +51,7 @@ class PerfilFragment : Fragment() {
             val mudarEmailFragment = MudarEmailFragment()
             activity!!.supportFragmentManager.beginTransaction()
                     .replace(
-                            com.example.apphoquei.R.id.frame_layout,
+                            R.id.frame_layout,
                             mudarEmailFragment,
                             "findThisFragment"
                     )
@@ -60,10 +60,10 @@ class PerfilFragment : Fragment() {
         }
 
         botaoMudarPass.setOnClickListener {
-            val mudarPasswordFragment = MudarEmailFragment()
+            val mudarPasswordFragment = MudarPasswordFragment()
             activity!!.supportFragmentManager.beginTransaction()
                     .replace(
-                            com.example.apphoquei.R.id.frame_layout,
+                            R.id.frame_layout,
                             mudarPasswordFragment,
                             "findThisFragment"
                     )
@@ -105,21 +105,6 @@ class PerfilFragment : Fragment() {
                             textViewNome.text = ""
                         }
                 }
-
-
-
-
             }
-
-//
-//        var nomeNovo = "Bruno"
-//        val utilizador = HashMap<String, Any>()
-//        utilizador["nome"] = nomeNovo
-//
-//        if (user != null) {
-//            FirebaseFirestore.getInstance().collection("Users").document(user.uid).update(utilizador)
-//        }
-
-
     }
 }
