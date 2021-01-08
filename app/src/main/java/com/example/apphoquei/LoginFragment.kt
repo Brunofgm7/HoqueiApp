@@ -1,5 +1,7 @@
 package com.example.apphoquei
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -17,6 +20,7 @@ class LoginFragment : Fragment() {
     lateinit var textPassword: EditText
     lateinit var botaoRegisto: Button
     lateinit var botaoLogin: Button
+    lateinit var botaoForgotYourPassword : TextView
     val mAuth = FirebaseAuth.getInstance()
 
 
@@ -28,6 +32,7 @@ class LoginFragment : Fragment() {
         textPassword = view.findViewById(R.id.textPassword)
         botaoRegisto = view.findViewById(R.id.botaoJaTemConta)
         botaoLogin = view.findViewById(R.id.botaoLogin)
+        botaoForgotYourPassword = view.findViewById(R.id.botaoForgotYourPassword)
 
         botaoLogin.setOnClickListener {
             var email: String = textEmail.text.toString()
@@ -43,7 +48,37 @@ class LoginFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+
+        botaoForgotYourPassword.setOnClickListener {
+            val builder = AlertDialog.Builder(activity)
+            builder.setTitle("Forgot your password")
+            val view = layoutInflater.inflate(R.layout.dialog_forgot_password, null)
+            val email = view.findViewById<EditText>(R.id.Email_recuperarPassword)
+            builder.setView(view)
+            builder.setPositiveButton("Reset", DialogInterface.OnClickListener { _, _ ->
+                forgotPassword(email)
+            })
+            builder.setNegativeButton("Fechar", DialogInterface.OnClickListener { _, _ -> })
+            builder.show()
+        }
+
+
         return view
+    }
+
+
+    private fun forgotPassword(email : EditText) {
+        if(email.text.toString().isEmpty()) {
+            return
+        }
+
+        mAuth.sendPasswordResetEmail(email.text.toString())
+                .addOnCompleteListener { task ->
+                    if(task.isSuccessful) {
+                        Toast.makeText(activity, "Se o email existir na base de dados, irá receber um email.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
     }
 
     private fun login(email: String, pass: String) {
