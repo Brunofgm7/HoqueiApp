@@ -1,11 +1,11 @@
 package com.example.apphoquei
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import android.widget.Toast
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -13,7 +13,11 @@ class ResultadosFragment : Fragment() {
 
     lateinit var mostrarData: TextView
 
-    override fun onCreateView (inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?  {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View?  {
 
         val view = inflater.inflate(R.layout.fragment_resultados, container, false)
 
@@ -44,12 +48,13 @@ class ResultadosFragment : Fragment() {
 
         val id = item.itemId
         if(id == R.id.chat) {
-            Toast.makeText(activity, "CHATTTTTTTTT", Toast.LENGTH_SHORT).show()
+            val intent = Intent(activity, ChatActivity::class.java)
+            startActivity(intent)
             return true
         }
         if(id == R.id.data) {
             val dpd = DatePickerDialog(activity!!, { _, mAno, mMes, mDia ->
-                mostrarData.text = "" + mDia + "/" + (mMes+1) + "/" + mAno
+                mostrarData.text = "" + mDia + "/" + (mMes + 1) + "/" + mAno
             }, ano, mes, dia)
             dpd.show()
         }
@@ -59,6 +64,5 @@ class ResultadosFragment : Fragment() {
     companion object {
         fun newInstance(): ResultadosFragment = ResultadosFragment()
     }
-
 
 }

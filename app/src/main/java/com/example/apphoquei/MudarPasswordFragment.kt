@@ -51,7 +51,7 @@ class MudarPasswordFragment : Fragment() {
                         activity?.finish();
                         this.startActivity(Intent(view?.context, MainActivity::class.java))
                     } else {
-                        Toast.makeText(activity, "ERRO: Palavra-passe não atualizada", Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity, "ERRO: Palavra-passe não atualizada. Experimente sair da conta e entrar.", Toast.LENGTH_LONG).show()
                     }
                 }
             } else {

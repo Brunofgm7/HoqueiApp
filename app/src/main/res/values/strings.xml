@@ -38,11 +38,19 @@
     <string name="password_atual">Password atual:</string>
     <string name="mudar_password2">Mudar password</string>
     <string name="nova_password">Nova password:</string>
-    <string name="repetir_nova_password">Repetir<br/> nova password:</string>
+    <string name="repetir_nova_password">Repetir<br /> nova password:</string>
     <string name="inserir_password_atual">Inserir password atual</string>
     <string name="inserir_nova_password">Inserir nova password</string>
     <string name="guardar3">Guardar</string>
     <string name="repetir_nova_password2">Repetir nova password</string>
     <string name="nome3">Nome</string>
     <string name="nome2">Nome:</string>
+    <string name="enviar">Enviar</string>
+    <string name="inserir_mensagem">Inserir mensagem</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="insira_mensagem">Insira mensagem</string>
+    <string name="enviar2">Enviar</string>
+    <string name="esta_a_minha_mensagem">Esta é a minha mensagem</string>
+    <string name="imagem_user_chat_from">imagem_user_chat_from</string>
+    <string name="esta_a_minha_mensagem2">Esta é a minha mensagem</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.apphoquei
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -30,7 +31,8 @@ class AoVivoFragment : Fragment() {
 
         val id = item.itemId
         if (id == R.id.chat) {
-            Toast.makeText(activity, "CHATTTTTTTTT", Toast.LENGTH_SHORT).show()
+            val intent = Intent(activity, ChatActivity::class.java)
+            startActivity(intent)
             return true
         }
         return super.onOptionsItemSelected(item)

@@ -2,8 +2,6 @@ package com.example.apphoquei
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.FrameMetrics
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +9,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 
 class MudarEmailFragment : Fragment() {
 
@@ -51,7 +49,7 @@ class MudarEmailFragment : Fragment() {
 
         if(user != null) {
             if(novoEmail.isNotEmpty()) {
-                user.updateEmail(novoEmail).addOnCompleteListener {task ->
+                user.updateEmail(novoEmail).addOnCompleteListener { task ->
                     if(task.isSuccessful) {
                         val utilizador = HashMap<String, Any>()
                         utilizador["email"] = novoEmail
@@ -63,7 +61,7 @@ class MudarEmailFragment : Fragment() {
                         activity?.finish();
                         this.startActivity(Intent(view?.context, MainActivity::class.java))
                     } else {
-                        Toast.makeText(activity, "ERRO: Email não atualizado", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "ERRO: Email não atualizado. Experimente sair da conta e entrar.", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -74,11 +72,14 @@ class MudarEmailFragment : Fragment() {
         val user = mAuth.currentUser
         val Auth = FirebaseFirestore.getInstance().collection("Users")
             .get()
-            .addOnCompleteListener {task ->
+            .addOnCompleteListener { task ->
                 if(task.isSuccessful) {
                     viewEmail.text = user!!.email
                 }
             }
     }
+
+
+
 
 }
