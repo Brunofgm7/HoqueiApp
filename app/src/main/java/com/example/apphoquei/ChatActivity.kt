@@ -97,7 +97,7 @@ class ChatActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 TextChat.text.clear()
                 RecyclerViewChat.scrollToPosition(adapter.itemCount - 1)
-        }
+            }
     }
 }
 

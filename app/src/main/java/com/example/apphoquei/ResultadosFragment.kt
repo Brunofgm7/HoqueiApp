@@ -3,21 +3,28 @@ package com.example.apphoquei
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Debug
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_perfil.*
+import kotlinx.android.synthetic.main.fragment_resultados.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ResultadosFragment : Fragment() {
 
     lateinit var mostrarData: TextView
+    private val dbFire : FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View?  {
+    var arrayJogos = ArrayList<JogoItem>()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?  {
 
         val view = inflater.inflate(R.layout.fragment_resultados, container, false)
 
@@ -25,6 +32,12 @@ class ResultadosFragment : Fragment() {
         val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
         val currentDate: String = simpleDateFormat.format(Date())
         mostrarData.text = currentDate
+
+        val listaJogos : List<JogoItem> = fetchJogos()
+
+        view.recyclerViewJogos.adapter = JogosAdapter(listaJogos)
+        view.recyclerViewJogos.layoutManager = LinearLayoutManager(activity!!)
+        arrayJogos = ArrayList()
 
         return view
     }
@@ -59,6 +72,24 @@ class ResultadosFragment : Fragment() {
             dpd.show()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun fetchJogos():List<JogoItem> {
+        FirebaseFirestore.getInstance().collection("1Jornada")
+            .get()
+            .addOnCompleteListener {
+                if(it.isSuccessful) {
+                    for(document in it.result!!) {
+
+                        val item = JogoItem(document.data.getValue(("Visitado").toString()) as String,
+                            document.data.getValue(("Visitante").toString()) as String,
+                            document.data.getValue(("Resultado").toString()) as String)
+
+                        arrayJogos.add(item)
+                    }
+                }
+            }
+        return arrayJogos
     }
 
     companion object {
