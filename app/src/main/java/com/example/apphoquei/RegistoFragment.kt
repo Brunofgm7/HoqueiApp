@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -13,12 +14,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class RegistoFragment : Fragment() {
 
-
     lateinit var botaoLogin: Button
     lateinit var botaoRegisto: Button
-
-    lateinit var nome: EditText
-
 
     val mAuth = FirebaseAuth.getInstance()
     val Auth = FirebaseFirestore.getInstance().collection("Users")
@@ -26,6 +23,8 @@ class RegistoFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_registo, container, false)
+
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         botaoRegisto = view.findViewById(R.id.botaoRegisto)
         botaoRegisto.setOnClickListener {
@@ -36,11 +35,7 @@ class RegistoFragment : Fragment() {
         botaoLogin.setOnClickListener {
             val loginFragment = LoginFragment()
             activity!!.supportFragmentManager.beginTransaction()
-                    .replace(
-                        com.example.apphoquei.R.id.frame_layout,
-                        loginFragment,
-                        "findThisFragment"
-                    )
+                    .replace(R.id.frame_layout, loginFragment,"findThisFragment")
                     .addToBackStack(null)
                     .commit()
         }
@@ -48,9 +43,9 @@ class RegistoFragment : Fragment() {
     }
 
     private fun registo() {
-        var nome = view?.findViewById<EditText>(R.id.textNomeRegisto)?.text.toString()
-        var email = view?.findViewById<EditText>(R.id.textEmailRegisto)?.text.toString()
-        var password = view?.findViewById<EditText>(R.id.textPasswordRegisto)?.text.toString()
+        val nome = view?.findViewById<EditText>(R.id.textNomeRegisto)?.text.toString()
+        val email = view?.findViewById<EditText>(R.id.textEmailRegisto)?.text.toString()
+        val password = view?.findViewById<EditText>(R.id.textPasswordRegisto)?.text.toString()
 
         if (nome.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->

@@ -1,12 +1,12 @@
 package com.example.apphoquei
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -23,10 +23,11 @@ class LoginFragment : Fragment() {
     lateinit var botaoForgotYourPassword : TextView
     val mAuth = FirebaseAuth.getInstance()
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_login, container, false)
+
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         textEmail = view.findViewById(R.id.textEmail)
         textPassword = view.findViewById(R.id.textPassword)
@@ -44,7 +45,7 @@ class LoginFragment : Fragment() {
         botaoRegisto.setOnClickListener {
             val registoFragment = RegistoFragment()
             activity!!.supportFragmentManager.beginTransaction()
-                .replace(com.example.apphoquei.R.id.frame_layout, registoFragment, "findThisFragment")
+                .replace(R.id.frame_layout, registoFragment, "findThisFragment")
                 .addToBackStack(null)
                 .commit()
         }
@@ -55,19 +56,18 @@ class LoginFragment : Fragment() {
             val view = layoutInflater.inflate(R.layout.dialog_forgot_password, null)
             val email = view.findViewById<EditText>(R.id.Email_recuperarPassword)
             builder.setView(view)
-            builder.setPositiveButton("Reset", DialogInterface.OnClickListener { _, _ ->
+            builder.setPositiveButton("Reset") { _, _ ->
                 forgotPassword(email)
-            })
-            builder.setNegativeButton("Fechar", DialogInterface.OnClickListener { _, _ -> })
+            }
+            builder.setNegativeButton("Fechar", { _, _ -> })
             builder.show()
         }
-
 
         return view
     }
 
 
-    private fun forgotPassword(email : EditText) {
+    private fun forgotPassword(email: EditText) {
         if(email.text.toString().isEmpty()) {
             return
         }

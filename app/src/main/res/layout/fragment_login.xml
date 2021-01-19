@@ -22,7 +22,7 @@
         android:ems="10"
         android:hint="@string/email2"
         android:inputType="textEmailAddress"
-        android:autofillHints="" />
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/textPassword"
@@ -42,7 +42,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="-100dp"
         android:clickable="true"
-        android:text="@string/forgor_your_password"
+        android:text="@string/forgot_your_password"
         android:textColor="#103AE4" />
 
     <Button

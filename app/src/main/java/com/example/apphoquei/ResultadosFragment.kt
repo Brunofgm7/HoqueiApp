@@ -2,13 +2,16 @@ package com.example.apphoquei
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Debug
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_perfil.*
@@ -20,9 +23,7 @@ import kotlin.collections.ArrayList
 class ResultadosFragment : Fragment() {
 
     lateinit var mostrarData: TextView
-    private val dbFire : FirebaseFirestore = FirebaseFirestore.getInstance()
-
-    var arrayJogos = ArrayList<JogoItem>()
+    lateinit var textViewNaoHaJogos : TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?  {
 
@@ -33,11 +34,21 @@ class ResultadosFragment : Fragment() {
         val currentDate: String = simpleDateFormat.format(Date())
         mostrarData.text = currentDate
 
-        val listaJogos : List<JogoItem> = fetchJogos()
 
-        view.recyclerViewJogos.adapter = JogosAdapter(listaJogos)
-        view.recyclerViewJogos.layoutManager = LinearLayoutManager(activity!!)
-        arrayJogos = ArrayList()
+        textViewNaoHaJogos = view.findViewById(R.id.textViewNaoHaJogos)
+        textViewNaoHaJogos.isVisible = false
+
+        fetchJogos {
+            if(it.size == 0) {
+                view.recyclerViewJogos.adapter = JogosAdapter(it)
+                view.recyclerViewJogos.layoutManager = LinearLayoutManager(activity!!)
+                textViewNaoHaJogos.isVisible = true
+            } else {
+                view.recyclerViewJogos.adapter = JogosAdapter(it)
+                view.recyclerViewJogos.layoutManager = LinearLayoutManager(activity!!)
+                textViewNaoHaJogos.isVisible = false
+            }
+        }
 
         return view
     }
@@ -67,29 +78,106 @@ class ResultadosFragment : Fragment() {
         }
         if(id == R.id.data) {
             val dpd = DatePickerDialog(activity!!, { _, mAno, mMes, mDia ->
-                mostrarData.text = "" + mDia + "/" + (mMes + 1) + "/" + mAno
+                if(mDia < 10) {
+                    if(mMes + 1 in 1..9) {
+                        mostrarData.text = "0" + mDia + "/" + "0" + (mMes + 1) + "/" + mAno
+                        fetchJogos {
+                            if(it.size == 0) {
+                                view?.recyclerViewJogos?.adapter = JogosAdapter(it)
+                                view?.recyclerViewJogos?.layoutManager = LinearLayoutManager(activity!!)
+                                textViewNaoHaJogos.isVisible = true
+                            } else {
+                                view?.recyclerViewJogos?.adapter = JogosAdapter(it)
+                                view?.recyclerViewJogos?.layoutManager = LinearLayoutManager(activity!!)
+                                textViewNaoHaJogos.isVisible = false
+                            }
+                        }
+                    } else {
+                        mostrarData.text = "0" + mDia + "/" + (mMes + 1) + "/" + mAno
+                        fetchJogos {
+                            if(it.size == 0) {
+                                textViewNaoHaJogos.isVisible = true
+                                view?.recyclerViewJogos?.adapter = JogosAdapter(it)
+                                view?.recyclerViewJogos?.layoutManager = LinearLayoutManager(activity!!)
+                            } else {
+                                view?.recyclerViewJogos?.adapter = JogosAdapter(it)
+                                view?.recyclerViewJogos?.layoutManager = LinearLayoutManager(activity!!)
+                                textViewNaoHaJogos.isVisible = false
+                            }
+                        }
+                    }
+                } else {
+                    if(mMes + 1 in 1..9) {
+                        mostrarData.text = "" + mDia + "/" + "0" + (mMes + 1) + "/" + mAno
+                        fetchJogos {
+                            if(it.size == 0) {
+                                textViewNaoHaJogos.isVisible = true
+                                view?.recyclerViewJogos?.adapter = JogosAdapter(it)
+                                view?.recyclerViewJogos?.layoutManager = LinearLayoutManager(activity!!)
+                            } else {
+                                view?.recyclerViewJogos?.adapter = JogosAdapter(it)
+                                view?.recyclerViewJogos?.layoutManager = LinearLayoutManager(activity!!)
+                                textViewNaoHaJogos.isVisible = false
+                            }
+                        }
+                    } else {
+                        mostrarData.text = "" + mDia + "/" + (mMes + 1) + "/" + mAno
+                        fetchJogos {
+                            if(it.size == 0) {
+                                textViewNaoHaJogos.isVisible = true
+                                view?.recyclerViewJogos?.adapter = JogosAdapter(it)
+                                view?.recyclerViewJogos?.layoutManager = LinearLayoutManager(activity!!)
+                            } else {
+                                view?.recyclerViewJogos?.adapter = JogosAdapter(it)
+                                view?.recyclerViewJogos?.layoutManager = LinearLayoutManager(activity!!)
+                                textViewNaoHaJogos.isVisible = false
+                            }
+                        }
+                    }
+                }
+
             }, ano, mes, dia)
             dpd.show()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun fetchJogos():List<JogoItem> {
+    private fun fetchJogos(myCallback: (ArrayList<JogoItem>) -> Unit) {
+        var arrayJogos = ArrayList<JogoItem>()
+
         FirebaseFirestore.getInstance().collection("1Jornada")
-            .get()
-            .addOnCompleteListener {
-                if(it.isSuccessful) {
-                    for(document in it.result!!) {
+                .get()
+                .addOnCompleteListener {
+                    if(it.isSuccessful) {
+                        for(document in it.result!!) {
+                            if(document.data.getValue(("Data").toString()) == mostrarData.text.toString()) {
+                                val item = JogoItem(document.data.getValue(("Visitado").toString()) as String,
+                                        document.data.getValue(("Visitante").toString()) as String,
+                                        document.data.getValue(("Resultado").toString()) as String)
 
-                        val item = JogoItem(document.data.getValue(("Visitado").toString()) as String,
-                            document.data.getValue(("Visitante").toString()) as String,
-                            document.data.getValue(("Resultado").toString()) as String)
-
-                        arrayJogos.add(item)
+                                arrayJogos.add(item)
+                            }
+                        }
                     }
                 }
-            }
-        return arrayJogos
+
+        FirebaseFirestore.getInstance().collection("2Jornada")
+                .get()
+                .addOnCompleteListener {
+                    if(it.isSuccessful) {
+                        for(document in it.result!!) {
+                            if(document.data.getValue(("Data").toString()) == mostrarData.text.toString()) {
+                                val item = JogoItem(document.data.getValue(("Visitado").toString()) as String,
+                                        document.data.getValue(("Visitante").toString()) as String,
+                                        document.data.getValue(("Resultado").toString()) as String)
+
+                                arrayJogos.add(item)
+
+                            }
+                        }
+                        myCallback(arrayJogos)
+                    }
+                }
     }
 
     companion object {

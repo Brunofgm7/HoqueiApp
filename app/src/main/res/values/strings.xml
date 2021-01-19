@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">AppHoquei</string>
-    <string name="hello_blank_fragment">Hello blanhgk fragment</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
-    <string name="forgor_your_password">Forgor your password?</string>
+    <string name="forgot_your_password">Forgot your password?</string>
     <string name="login2">Login</string>
     <string name="ainda_n_o_tem_conta">Ainda não tem conta?</string>
     <string name="registo">Registo</string>
@@ -53,4 +52,5 @@
     <string name="esta_a_minha_mensagem">Esta é a minha mensagem</string>
     <string name="imagem_user_chat_from">imagem_user_chat_from</string>
     <string name="esta_a_minha_mensagem2">Esta é a minha mensagem</string>
+    <string name="n_o_h_jogos">Não há jogos</string>
 </resources>

@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.layout_jogo.view.*
 
 class JogosAdapter(private val exampleList: List<JogoItem>) : RecyclerView.Adapter<JogosAdapter.ExampleViewHolder>() {
 
@@ -27,9 +26,9 @@ class JogosAdapter(private val exampleList: List<JogoItem>) : RecyclerView.Adapt
 
 
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textViewVisitado: TextView = itemView.textViewVisitado
-        val textViewVisitante: TextView = itemView.textViewVisitante
-        val textViewResultado: TextView = itemView.textViewResultado
+        val textViewVisitado: TextView = itemView.findViewById(R.id.textViewVisitado)
+        val textViewVisitante: TextView = itemView.findViewById(R.id.textViewVisitante)
+        val textViewResultado: TextView = itemView.findViewById(R.id.textViewResultado)
 
     }
 

@@ -2,6 +2,7 @@ package com.example.apphoquei
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -37,6 +38,12 @@ class ChatActivity : AppCompatActivity() {
 
         botaoEnviar.setOnClickListener {
             EnviarMensagem()
+        }
+
+        TextChat.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                RecyclerViewChat.scrollToPosition(adapter.itemCount)
+            }
         }
     }
 
@@ -102,7 +109,7 @@ class ChatActivity : AppCompatActivity() {
 }
 
 class ChatFromItem(val text: String): Item<GroupieViewHolder>() {
-    override  fun bind (groupieViewHolder: GroupieViewHolder, position: Int) {
+    override  fun bind(groupieViewHolder: GroupieViewHolder, position: Int) {
         groupieViewHolder.itemView.textView_from_row.text = text
     }
 
@@ -112,7 +119,7 @@ class ChatFromItem(val text: String): Item<GroupieViewHolder>() {
 }
 
 class ChatToItem(val text: String): Item<GroupieViewHolder>() {
-    override  fun bind (groupieViewHolder: GroupieViewHolder, position: Int) {
+    override  fun bind(groupieViewHolder: GroupieViewHolder, position: Int) {
         groupieViewHolder.itemView.textView_to_row.text = text
 
     }
